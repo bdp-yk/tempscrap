@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v4.0.1">
+  <title>Signin Template · Bootstrap</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='bootstrap/dist/css/bootstrap.css')}}" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="{{url_for('static',filename='css/signin.css')}}" rel="stylesheet">
+</head>
+
+<body class="text-center">
+  <form class="form-signin" method="POST" action="{{ url_for('signin' if isSignIn else 'signup') }}">
+    <img class="mb-4" src="{{ url_for('static', filename='brand/bootstrap-solid.svg')}}" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign-{{'in' if isSignIn else 'up'}}</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email address" required
+      autofocus>
+
+    {%if not isSignIn%}
+    <label for="inputuser_name" class="sr-only">UserName</label>
+    <input type="text" id="inputuser_name" name="user_name" class="form-control" placeholder="UserName" required
+      autofocus>
+    {%endif%}
+
+    <label for="inputpassword" class="sr-only">Password</label>
+    <input type="password" id="inputpassword" name="password" class="form-control" placeholder="password" required>
+    <!--     
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div> -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+        <span class="text-danger">{{ message }}</span> <br>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign-{{'in' if isSignIn else 'up'}}</button>
+    <a class="btn btn-link" type="submit"
+      href="{{url_for('signup' if isSignIn else 'signin')}}">Sign-{{'up' if isSignIn else 'in'}} instead</a>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+Flask
+flask-bcrypt
+pymongo
+pymongo[srv]
